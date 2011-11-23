@@ -13,6 +13,8 @@ from datetime import datetime
 def getUsage(type,phase,room):
 	""" 	type 	- percent 	-> 	percentage of your bandwidth used
 					- left		->	quantity in GB of your bandwidth left
+					- usage 	->	quantity in GB of your bandwidth usage
+					- all 		->	summary of your usage
 			phase	must be 1, 2  or 3
 			room	must be an existing room in the block
 	"""
@@ -42,6 +44,10 @@ def getUsage(type,phase,room):
 		return "{:0.2f}%".format(pct)
 	if type == "left":
 		return "{:0.2f}GB".format(left)
+	if type =="usage":
+		return "{:0.2f}GB".format(usage/1024)
+	if type =="all":
+		return "Used :\t\t{:0.2f}GB ({:0.2f}%)\nLeft :\t\t{:0.2f}GB ({:0.2f}%)\nTotal :\t\t{:0.2f}GB".format(usage/1024,pct,left,100-pct,max/1024)
 	raise Exception('Must choose between "percent" and "left" ')	
 
 
