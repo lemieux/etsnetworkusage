@@ -19,6 +19,8 @@ def getUsage(type,phase,room):
 			room	must be an existing room in the block
 	"""
 
+	#Regex took from http://etsreznetusage.codeplex.com/
+	regexRowUsage = '<TR><TD>(.*)</TD><TD>(.*)</TD><TD ALIGN="RIGHT">(.*)</TD><TD ALIGN="RIGHT">(.*)</TD></TR>'
 	regexUsage = '<TR><TD COLSPAN="3"><B>Total combin&eacute;:</B></TD><TD ALIGN="RIGHT">(.*)</TD></TR>'
 	regexMax ='<TD>Quota permis pour la p&eacute;riode</TD><TD ALIGN="RIGHT">(.*)</TD></TD></TR>'
 
