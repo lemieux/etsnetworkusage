@@ -8,7 +8,7 @@ import urllib
 import re
 import sys
 from datetime import datetime
-
+import api
 
 def getUsage(type,phase,room):
 	""" 	type 	- percent 	-> 	percentage of your bandwidth used
@@ -19,28 +19,7 @@ def getUsage(type,phase,room):
 			room	must be an existing room in the block
 	"""
 
-	#Regex took from http://etsreznetusage.codeplex.com/
-	regexRowUsage = '<TR><TD>(.*)</TD><TD>(.*)</TD><TD ALIGN="RIGHT">(.*)</TD><TD ALIGN="RIGHT">(.*)</TD></TR>'
-	regexUsage = '<TR><TD COLSPAN="3"><B>Total combin&eacute;:</B></TD><TD ALIGN="RIGHT">(.*)</TD></TR>'
-	regexMax ='<TD>Quota permis pour la p&eacute;riode</TD><TD ALIGN="RIGHT">(.*)</TD></TD></TR>'
-
-
-	url ="http://ets-res%s-%s:ets%s@www2.cooptel.qc.ca/services/temps/?mois=%s&cmd=Visualiser" % (phase,room,room,datetime.now().month)
-
-	f = urllib.urlopen(url)
-	s = f.read()
-	f.close()
-
-	m = re.search(regexUsage,s)
-
-	usage = float(m.group(1).lstrip())
-
-
-	m = re.search(regexMax,s)
-	max = float(m.group(1))
-
-	pct = usage/max*100
-	left = (max-usage)/1024
+	return api.getData(phase,room,datetime.now().month)
 
 	if type == "percent":
 		return "{:0.2f}%".format(pct)
