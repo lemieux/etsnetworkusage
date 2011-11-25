@@ -28,7 +28,7 @@ It will return you a JSON object with the following properties :
 * maximum : total (in GB)
 * details : array of each day of the month
 
-The *details* is an array of JSON objects with the following properties :
+The *details* property is an array of JSON objects with the following properties :
 
 * port : port identifer for this day usage
 * date : date of the stat
